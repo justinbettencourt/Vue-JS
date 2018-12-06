@@ -8,20 +8,51 @@
 	<script src="vue.js"></script>
 </head>
 <body>
-	<div id="app">
+	<!-- Section 2: Directives -->
+	<div id="app1">
 		<input type="text" v-on:input="changeTitle">
 		<p>{{title}}</p>
 	</div>
+
+	<!-- Section 2: Events -->
+	<div id="app2">
+		<button v-on:click="increase(2, $event)">Click Me</button>
+		<p>{{ counter }}</p>
+		<p v-on:mousemove="updateCoordinates">
+			Coordinates: {{ x }} / {{ y }}
+			- <span v-on:mousemove.stop="dummy">DEAD SPOT</span>
+		</p>
+	</div>
 </body>
 <script>
+	// Section 2: Directives
 	new Vue({
-		el: '#app',
+		el: '#app1',
 		data: {
 			title: 'Hello World!'
 		},
 		methods: {
 			changeTitle: function() {
 				this.title = event.target.value;
+			}
+		}
+	});	
+
+	// Section 2: Directives
+	new Vue({
+		el: '#app2',
+		data: {
+			counter: 0,
+			x: 0,
+			y: 0
+		},
+		methods: {
+			increase: function(step, event) {
+				this.counter += step;
+			},
+			updateCoordinates: function(event) {
+				this.x = event.clientX;
+				this.y = event.clientY;
 			}
 		}
 	});	
