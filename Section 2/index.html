@@ -22,6 +22,7 @@
 			Coordinates: {{ x }} / {{ y }}
 			- <span v-on:mousemove.stop="dummy">DEAD SPOT</span>
 		</p>
+		<input type="text" v-on:keyup.enter="alertMe">
 	</div>
 </body>
 <script>
@@ -53,6 +54,9 @@
 			updateCoordinates: function(event) {
 				this.x = event.clientX;
 				this.y = event.clientY;
+			},
+			alertMe: function() {
+				alert('Alert!');
 			}
 		}
 	});	
