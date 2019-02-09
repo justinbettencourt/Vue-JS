@@ -13,16 +13,35 @@
 		<input type="text" v-on:input="changeTitle">
 		<p>{{title}}</p>
 	</div>
-
+	<hr>
 	<!-- Section 2: Events -->
 	<div id="app2">
 		<button v-on:click="increase(2, $event)">Click Me</button>
-		<p>{{ counter }}</p>
+		<button v-on:click="counter++">Click Me</button>
+		<p>{{ counter * 2 }} : {{ counter * 2 > 10 ? 'Greater than 10' : 'Smaller than 10'}} </p>
+		<p></p>
 		<p v-on:mousemove="updateCoordinates">
 			Coordinates: {{ x }} / {{ y }}
 			- <span v-on:mousemove.stop="dummy">DEAD SPOT</span>
 		</p>
 		<input type="text" v-on:keyup.enter="alertMe">
+	</div>
+	<hr>
+	<!-- Section 2: Two-Way-Binding -->
+	<div id="app3">
+		<input type="text" v-model="name">
+		<p>{{ name }}</p>
+		<button v-on:click="newName = name">Click to update name</button>
+		<p>{{ newName }}</p>
+	</div>
+	<hr>
+	<!-- Section 2: Reacting to Changes with Computed Properties -->
+	<div id="app4">
+		<button v-on:click='counter++'>Increase</button>
+		<button v-on:click='counter--'>Decrease</button>
+		<button v-on:click='secondCounter++'>Increase Second</button>
+		<p>Counter: {{ counter }} | {{ secondCounter }}</p>
+		<p>Result: {{ result() }} | {{ output }}</p>
 	</div>
 </body>
 <script>
@@ -60,5 +79,34 @@
 			}
 		}
 	});	
+
+	// Section 2: Two-Way-Binding
+	new Vue({
+		el: '#app3',
+		data: {
+			name: 'Justin',
+			newName: 'My Name'
+		}
+	});
+	// Section 2: Reacting to Changes with Computed Properties
+	new Vue({
+		el: '#app4',
+		data: {
+			counter: 0,
+			secondCounter: 0
+		},
+		computed: {
+			output: function() {
+				console.log('Computed');
+				return this.counter > 5 ? 'Greater 5' : 'Smaller 5';
+			}
+		},
+		methods: {
+			result: function() {
+				console.log('Method');
+				return this.counter > 5 ? 'Greater 5' : 'Smaller 5';
+			}
+		}
+	});
 </script>
 </html>

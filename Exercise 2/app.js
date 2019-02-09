@@ -2,10 +2,10 @@ new Vue({
         el: '#exercise',
         data: {
             value: ''
-		},
-		methods: {
-			alertMe: function() {
-				alert('Alert');
-			}
-		}
+        },
+        methods: {
+        	alertMe: function() {
+          	alert('Alert!');
+          }
+        }
     });
