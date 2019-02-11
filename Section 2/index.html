@@ -98,9 +98,19 @@
 		computed: {
 			output: function() {
 				console.log('Computed');
-				return this.counter > 5 ? 'Greater 5' : 'Smaller 5';
+				return this.secondCounter > 5 ? 'Greater 5' : 'Smaller 5';
 			}
 		},
+		watch: {
+			// Whenever 2 seconds is reached, reset the counter value.
+			counter: function(value) {
+				var vm = this;
+				setTimeout(function() {
+					vm.counter = 0;
+				}, 2000)
+			}
+		},
+		// The result method keeping track when the rounter is increased. When it reached over 5, the message changs.
 		methods: {
 			result: function() {
 				console.log('Method');
