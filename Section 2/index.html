@@ -6,7 +6,29 @@
 	<title>VueJS</title>
 	<link rel="stylesheet" href="">
 	<script src="vue.js"></script>
+	<style>
+		.demo {
+			width: 100px;
+			height: 100px;
+			background-color: gray;
+			display: inline-block;
+			margin: 10px;
+		}
+
+		.red {
+			background-color: red;
+		}
+
+		.green {
+			background-color: green;
+		}
+
+		.blue {
+			background-color: blue;
+		}
+	</style>
 </head>
+
 <body>
 	<!-- Section 2: Directives -->
 	<div id="app1">
@@ -14,6 +36,7 @@
 		<p>{{title}}</p>
 	</div>
 	<hr>
+	
 	<!-- Section 2: Events -->
 	<div id="app2">
 		<button v-on:click="increase(2, $event)">Click Me</button>
@@ -27,6 +50,7 @@
 		<input type="text" v-on:keyup.enter="alertMe">
 	</div>
 	<hr>
+	
 	<!-- Section 2: Two-Way-Binding -->
 	<div id="app3">
 		<input type="text" v-model="name">
@@ -35,6 +59,7 @@
 		<p>{{ newName }}</p>
 	</div>
 	<hr>
+	
 	<!-- Section 2: Reacting to Changes with Computed Properties -->
 	<div id="app4">
 		<button v-on:click='counter++'>Increase</button>
@@ -42,6 +67,28 @@
 		<button v-on:click='secondCounter++'>Increase Second</button>
 		<p>Counter: {{ counter }} | {{ secondCounter }}</p>
 		<p>Result: {{ result() }} | {{ output }}</p>
+	</div>
+	<hr>
+	
+	<!-- Section 2: Dynamic Styling with CSS Classes -->
+	<div id="app5">
+		<div>
+			<div class="demo" @click="attachRed = !attachRed" :class="divClasses"></div>
+			<div class="demo" :class="{red: attachRed}"></div>
+			<div class="demo" :class="[color, {red: attachRed}]"></div>
+			<input type="text" v-model="color">
+		</div>
+	</div>
+	<hr>
+	
+	<!-- Section 2: Dynamic Styling without CSS Classes -->
+	<div id="app6">
+		<div>
+			<div class="demo"></div>
+			<div class="demo"></div>
+			<div class="demo"></div>
+			<input type="text" v-model="color">
+		</div>
 	</div>
 </body>
 <script>
@@ -88,6 +135,7 @@
 			newName: 'My Name'
 		}
 	});
+
 	// Section 2: Reacting to Changes with Computed Properties
 	new Vue({
 		el: '#app4',
@@ -118,5 +166,31 @@
 			}
 		}
 	});
+
+	// Section 2: Dynamic Styling with CSS Classes
+	new Vue({
+		el: '#app5',
+		data: {
+			attachRed: false,
+			color: 'green'
+		},
+		computed: {
+			divClasses: function() {
+				return{
+					red: this.attachRed,
+					blue: !this.attachRed
+				};
+			}
+		}
+	});
+
+	// Section 2: Dynamic Styling without CSS Classes
+	new Vue({
+		el: '#app6',
+		data: {
+			color: 'gray'
+		}
+	});
 </script>
+
 </html>
