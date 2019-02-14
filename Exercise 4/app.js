@@ -4,6 +4,17 @@ new Vue({
 	effectClasses: {
 		highlight: false,
 		shrink: true
+	},
+	userClass: '',
+	isVisible: true,
+	myStyle: {
+		width:'100px',
+		height: '150px',
+		backgroundColor: 'gray'
+	},
+	progressBar: {
+		width: '0px',
+		backgroundColor: 'red'
 	}
   },
   methods: {
@@ -13,6 +24,14 @@ new Vue({
 			vm.effectClasses.highlight = !vm.effectClasses.highlight,
 			vm.effectClasses.shrink = !vm.effectClasses.shrink
 		}, 1000);
-    }
+	},
+	startProgress: function() {
+		var vm = this;
+		var width = 0;
+		setInterval(function() {
+			width = width + 10;
+			vm.progressBar.width = width + 'px';
+		}, 500);
+	},
   }
 });
