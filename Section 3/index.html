@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+	<style>
+	</style>
+</head>
+
+<body>
+	<!-- Section 3: v-if & v-else -->
+	<div id="app1">
+		<!-- v-if will remove the element from the DOM -->
+		<p v-if="show">You can see me!</p>
+		<!-- v-show will only apply the css class "display: none;". If will still be loaded in the DOM -->
+		<p v-show="show">Do you also see me?</p>
+		<template v-if="show">
+			<h1>Heading</h1>
+			<p>Inside a template</p>
+		</template>
+		<button @click="show = !show">Switch</button>
+	</div>
+	<hr>
+	<!-- Section 3: Rendering Lists with v-for -->
+	<div id="app2">
+		<h3>Grocery List</h3>
+		<ul>
+			<li v-for="(ingredient, i) in ingredients">{{ ingredient }} ({{ i }}) </li>
+		</ul>
+		<hr>
+		<ul>
+			<li v-for="person in persons">
+				<div v-for="(value, key, index) in person">{{ key }}: {{ value }} ({{ index }})</div>
+			</li>
+		</ul>
+		<hr>
+		<template v-for="(ingredient, index) in ingredients">
+			<h1>{{ ingredient }}</h1>
+			<p>{{ index }}</p>
+		</template>
+	</div>
+	<hr>
+</body>
+<script>
+	// Section 3: v-if & v-else
+	new Vue({
+		el: '#app1',
+		data: {
+			show: true
+		}
+	});	
+	// Section 3: Rendering Lists with v-for
+	new Vue({
+		el: '#app2',
+		data: {
+			ingredients: ['meat', 'fruit', 'vegetables'],
+			persons: [
+				{name: 'Justin', age: 26, color: 'blue'},
+				{name: 'Shelby', age: 29, color: 'green'}
+			]
+		}
+	});	
+</script>
+
+</html>
